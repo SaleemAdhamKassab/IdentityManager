@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Identity;
+
+@model IdentityRole;
+
+<h3 style="color:red">Update [@Model.Name] Role</h3>
+<form method="post" asp-controller="Roles" asp-action="Edit">
+	<div class="input-group mb-3">
+		<input type="hidden" asp-for="Id" />
+		<input class="form-control" asp-for="Name" placeholder="Role name..." required />
+		<div class="input-group-append">
+			<button type="submit" class="btn btn-primary">Save</button>
+		</div>
+	</div>
+</form>

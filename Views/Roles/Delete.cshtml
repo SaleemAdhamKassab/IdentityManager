@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IdentityRole;
+
+
+<h3 style="color:red">Are you sure to delete <span style="color:green"><b><u>@Model.Name</u></b></span> Role?</h3>
+<form method="post" asp-controller="Roles" asp-action="Delete">
+	<div class="input-group mb-3">
+		<input type="hidden" asp-for="Id" />
+		<div class="input-group-append">
+			<button type="submit" class="btn btn-danger">Delete</button>
+		</div>
+	</div>
+</form>

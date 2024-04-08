@@ -1,0 +1,46 @@
+﻿@using IdentityManager.ViewModels
+@model ClaimsViewModel
+
+<div class="row col-md-10 offset-md-1">
+	<h1 class="text-primary text-center pt-2">Manage @Model.User.UserName Claims</h1>
+
+	<form method="post" asp-action="manageUserClaims">
+
+		<div class="border p-2 rounded">
+
+			<input hidden asp-for="User.Id" class="form-control" />
+
+			<div class="form-group">
+				<label asp-for="User.UserName" class="col-12">User Name</label>
+				<div class="col-md-12">
+					<input asp-for="User.UserName" class="form-control" disabled />
+					<span asp-validation-for="User.UserName" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+
+			<div class="form-group">
+				<span class="col-12">Claims Assignment</span>
+
+				@for (int i = 0; i < Model.ClaimList.Count; i++)
+				{
+					<div class="form-check m-1">
+						<input type="hidden" asp-for="@Model.ClaimList[i].ClaimType" />
+						<input asp-for="@Model.ClaimList[i].IsSelected" class="form-check-input" />
+						<label class="form-check-label" asp-for="@Model.ClaimList[i].IsSelected">
+							@Model.ClaimList[i].ClaimType
+						</label>
+					</div>
+				}
+			</div>
+
+
+			<div class="form-group pt-2 mb-3">
+				<div class="col-md-6 offset-md-3">
+					<button class="btn-success form-control" type="submit">Save</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

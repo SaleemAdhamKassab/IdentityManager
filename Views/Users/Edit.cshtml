@@ -1,0 +1,71 @@
+﻿@using IdentityManager.ViewModels
+@using Microsoft.AspNetCore.Identity
+@model UserWithRolesViewModel
+@inject RoleManager<IdentityRole> _roleManager;
+
+<div class="row col-md-10 offset-md-1">
+	<h1 class="text-primary text-center pt-2">Update @Model.UserName Profile</h1>
+
+	<form method="post" asp-action="edit">
+
+		<input type="hidden" asp-for="ID" />
+
+		<div class="border p-2 rounded">
+			<div asp-validation-summary="All" class="text-danger"></div>
+
+			<div class="form-group">
+				<label asp-for="Email" class="col-12">Email</label>
+				<div class="col-md-12">
+					<input asp-for="Email" class="form-control" />
+					<span asp-validation-for="Email" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+			<div class="form-group">
+				<label asp-for="FirstName" class="col-12">FirstName</label>
+				<div class="col-md-12">
+					<input asp-for="FirstName" class="form-control" />
+					<span asp-validation-for="FirstName" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+			<div class="form-group">
+				<label asp-for="LastName" class="col-12">LastName</label>
+				<div class="col-md-12">
+					<input asp-for="LastName" class="form-control" />
+					<span asp-validation-for="LastName" class="text-danger"></span>
+				</div>
+			</div>
+
+			@* Roles *@
+			<br />
+			<div class="form-group">
+				<label asp-for="LastName" class="col-12">Roles</label>
+				<div class="col-md-12">
+					<ul>
+						@foreach (string role in Model.Roles)
+						{
+							<li>@role</li>
+						}
+					</ul>
+				</div>
+
+			</div>
+			<br />
+
+			<div class="form-group pt-2 mb-3">
+				<div class="col-md-6 offset-md-3">
+					<button class="btn-success form-control" type="submit">Save</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

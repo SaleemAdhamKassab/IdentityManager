@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
+
+
+<form method="post" asp-controller="Roles" asp-action="addRole">
+	<div class="input-group mb-3">
+
+		<input class="form-control" name="roleName" placeholder="Role name..." required />
+		<div class="input-group-append">
+			<button type="submit" class="btn btn-primary">Add New Role</button>
+		</div>
+	</div>
+</form>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col"></th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@{
+			@foreach (IdentityRole role in Model)
+			{
+				<tr>
+					<td>@role.Name</td>
+					<td>
+						<a class="btn btn-secondary btn-sm" asp-action="Edit" asp-route-roleName="@role.Name">Edit</a>
+					</td>
+					<td>
+						<a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-roleName="@role.Name">Delete</a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

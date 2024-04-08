@@ -1,0 +1,54 @@
+﻿@using IdentityManager.ViewModels
+
+@model UserWithRolesViewModel;
+
+<div class="row col-md-10 offset-md-1">
+	<h1 class="text-primary text-center pt-2">Are you sure to Delete the user: <span style="color:red"><b><u>@Model.UserName</u></b></span> ? </h1>
+
+	<form method="post" asp-action="Delete">
+		<div class="border p-2 rounded">
+
+			<input type="hidden" asp-for="@Model.ID" />
+
+			<div class="form-group">
+				<label asp-for="Email" class="col-12">Email</label>
+				<div class="col-md-12">
+					<input asp-for="Email" class="form-control" disabled />
+					<span asp-validation-for="Email" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+			<div class="form-group">
+				<label asp-for="FirstName" class="col-12">FirstName</label>
+				<div class="col-md-12">
+					<input asp-for="FirstName" class="form-control" disabled />
+					<span asp-validation-for="FirstName" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+			<div class="form-group">
+				<label asp-for="LastName" class="col-12">LastName</label>
+				<div class="col-md-12">
+					<input asp-for="LastName" class="form-control" disabled />
+					<span asp-validation-for="LastName" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+			<div class="form-group">
+				<label asp-for="UserName" class="col-12">User Name</label>
+				<div class="col-md-12">
+					<input asp-for="UserName" class="form-control" disabled />
+					<span asp-validation-for="UserName" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+			<div class="input-group-append">
+				<button type="submit" class="btn btn-danger">Delete</button>
+			</div>
+		</div>
+	</form>
+</div>

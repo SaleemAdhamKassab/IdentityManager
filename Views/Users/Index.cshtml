@@ -1,0 +1,79 @@
+﻿@using IdentityManager.ViewModels
+@using System.Security.Claims
+
+@model List<UserWithRolesViewModel>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">First Name</th>
+			<th scope="col">Last Name</th>
+			<th scope="col">Email</th>
+			<th scope="col">User Name</th>
+			<th scope="col">Roles</th>
+			<th scope="col">Claims</th>
+			<th scope="col"></th>
+			<th scope="col"></th>
+			<th scope="col"></th>
+			<th scope="col"></th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@{
+			@foreach (UserWithRolesViewModel user in Model)
+			{
+				<tr>
+					<td>@user.FirstName</td>
+					<td>@user.LastName</td>
+					<td>@user.Email</td>
+					<td>@user.UserName</td>
+					<td>
+						@{
+							string userRoles = "";
+							foreach (string role in user.Roles)
+								userRoles += @role + "-";
+						}
+						@userRoles.Remove(userRoles.Length - 1, 1)
+					</td>
+					<td>
+						@{
+							string userClaims = "";
+							foreach (Claim claim in user.Claims)
+								userClaims += claim.Type + "-";
+						}
+						@if (!string.IsNullOrEmpty(userClaims))
+							@userClaims.Remove(userClaims.Length - 1, 1)
+
+					</td>
+					<td>
+						<a class="btn btn-success btn-sm" asp-action="Edit" asp-route-userId="@user.ID">Edit</a>
+					</td>
+					<td>
+						@if (user.IsLocked)
+						{
+							<form method="post">
+								<input type="submit" value="Un Lock" class="btn btn-success btn-sm" asp-action="lockUnLock" asp-route-userId="@user.ID" />
+							</form>
+						}
+						else
+						{
+							<form method="post">
+								<input type="submit" value="Lock" class="btn btn-warning btn-sm" asp-action="lockUnLock" asp-route-userId="@user.ID" />
+							</form>
+						}
+					</td>
+					<td>
+						<a class="btn btn-info btn-sm" asp-action="manageRoles" asp-route-userId="@user.ID">Roles</a>
+					</td>
+					<td>
+						<a class="btn btn-secondary btn-sm" asp-action="manageUserClaims" asp-route-userId="@user.ID">Claims</a>
+					</td>
+					<td>
+						<a class="btn btn-danger btn-sm" asp-action="delete" asp-route-userId="@user.ID">Delete</a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

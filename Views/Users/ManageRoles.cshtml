@@ -1,0 +1,45 @@
+﻿@using IdentityManager.ViewModels
+@model UserRolesViewModel
+
+<div class="row col-md-10 offset-md-1">
+	<h1 class="text-primary text-center pt-2">Manage @Model.UserName Roles</h1>
+
+	<form method="post" asp-action="manageRoles">
+
+		<div class="border p-2 rounded">
+
+			<input hidden asp-for="ID" class="form-control" />
+
+			<div class="form-group">
+				<label asp-for="UserName" class="col-12">User Name</label>
+				<div class="col-md-12">
+					<input asp-for="UserName" class="form-control" disabled />
+					<span asp-validation-for="UserName" class="text-danger"></span>
+				</div>
+			</div>
+
+			<br />
+
+			<div class="form-group">
+				<label asp-for="UserName" class="col-12">Roles</label>
+				@for (int i = 0; i < Model.Roles.Count; i++)
+				{
+					<div class="form-check m-1">
+						<input type="hidden" asp-for="@Model.Roles[i].Name" />
+						<input asp-for="@Model.Roles[i].IsSelected" class="form-check-input" />
+						<label class="form-check-label" asp-for="@Model.Roles[i].IsSelected">
+							@Model.Roles[i].Name
+						</label>
+					</div>
+				}
+			</div>
+
+
+			<div class="form-group pt-2 mb-3">
+				<div class="col-md-6 offset-md-3">
+					<button class="btn-success form-control" type="submit">Save</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
